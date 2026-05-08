@@ -4,7 +4,6 @@ on:
   schedule:
     # 每天 UTC 时间 16:00 运行
     # 对应北京时间 00:00 (午夜)
-    # 这样能确保覆盖到当天的格子
     - cron: '0 16 * * *'
   workflow_dispatch: # 允许手动点击运行
 
@@ -13,12 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        # 修改点1: 将版本从 @v4 升级到 @v5 以支持 Node.js 24
+        # 已更新到 v5 以解决 Node.js 20 报错
         uses: actions/checkout@v5
         with:
-          # 必须设置 Token，否则 Actions 的提交不会触发新的 Actions，且无法写入
           token: ${{ secrets.GITHUB_TOKEN }}
-          # 必须设置用户信息，否则 git commit 会报错
           fetch-depth: 0 
 
       - name: Configure Git
@@ -28,5 +25,6 @@ jobs:
 
       - name: Run Green Script
         run: |
-          chmod +x paint_green.sh
-          ./paint_green.sh
+          # 修改点：这里改成了你的文件名 green.sh
+          chmod +x green.sh
+          ./green.sh
