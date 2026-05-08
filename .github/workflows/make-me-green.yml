@@ -13,7 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        # 修改点1: 将版本从 @v4 升级到 @v5 以支持 Node.js 24
+        uses: actions/checkout@v5
         with:
           # 必须设置 Token，否则 Actions 的提交不会触发新的 Actions，且无法写入
           token: ${{ secrets.GITHUB_TOKEN }}
